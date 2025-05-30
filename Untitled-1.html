@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
+  <title>TomzStore</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+       background-image: url('ca') center center;
+      min-height: 100vh;
+    }
+
+    .slide {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url(y.jpg)center center;
+      background-image: url("y.jpg");
+      color: rgb(243, 234, 234);
+      text-align: center;
+      padding: 2em;
+
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fade 0.5s;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      font-size: 1.3em;
+      margin-bottom: 0.2em;
+    }
+
+    .btn {
+      background: #27ae60;
+      color: rgb(2, 2, 2);
+      padding: 1em 2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 2em;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #1e8c4f;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5em;
+      padding-top: 2em;
+    }
+
+    .product {
+      background: rgba(249, 249, 249, 0.95);
+      border-radius: 10px;
+      width: 260px;
+      padding: 1em;
+      color: rgb(0, 0, 0);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .product img {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .price { color: #27ae60; font-weight: bold; }
+
+    .buy-button {
+      margin-top: 1em;
+      padding: 0.6em;
+      width: 100%;
+      background: #27ae60;
+      color: rgb(246, 244, 244);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+.card > img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 15px;
+    .buy-button:hover {
+      background: #608d73;
+    }
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="slide active" id="slide1" style="padding: 0;">
+  <div style="background:color(srgb red lch(14.66% 74.99 304.38 / 0.247) blue); padding: 3em 1em 2em; text-align: center;">
+    <h1 style="color: white; font-size: 2.5em;">Toko Online TomzStore</h1>
+    <p style="color: white; font-size: 1.3em;">Selamat Datang di TomzStore!</p>
+    <p style="color: white; font-size: 1.3em;">Layanan Ketik Dokumen!</p>
+  </div>
+  <button class="btn" onclick="goToSlide(2)">Lihat Produk</button>
+</div>
+
+
+<div class="slide" id="slide2">
+  <div>
+    <h1>Produk Kami</h1>
+    <div class="product-grid">
+      <div class="product">
+        <img src="L.png" alt="Laporan">
+        <h3>Laporan</h3>
+        <p>Pengetikan laporan rapi dan sesuai format kampus.</p>
+        <p class="price">Rp3.000 / halaman</p>
+        <button class="buy-button" onclick="location.href='https://wa.me/62895343287264?text=Saya%20ingin%20memesan%20laporan'">Pesan</button>
+      </div>
+      <div class="product">
+        <img src="m.png" alt="Makalah">
+        <h3>Makalah</h3>
+        <p>Makalah kampus dan sekolah cepat dan rapi.</p>
+        <p class="price">Rp3.000 / halaman</p>
+        <button class="buy-button" onclick="location.href='https://wa.me/62895343287264??text=Saya%20ingin%20memesan%20makalah'">Pesan</button>
+      </div>
+      <div class="product">
+        <img src="s.png" alt="Surat">
+        <h3>Surat/Dokumen</h3>
+        <p>Surat lamaran, dokumen resmi, dan lainnya.</p>
+        <p class="price">Rp3.000 / halaman</p>
+        <button class="buy-button" onclick="location.href='https://wa.me/62895343287264??text=Saya%20ingin%20memesan%20surat'">Pesan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 1;
+
+  function goToSlide(n) {
+    document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+    document.getElementById('slide' + n).classList.add('active');
+    currentSlide = n;
+
+    if (n === 2) {
+      history.pushState({slide: 2}, '', '#produk');
+    } else {
+      history.pushState({slide: 1}, '', '#home');
+    }
+  }
+
+  window.addEventListener('popstate', function (e) {
+    if (e.state && e.state.slide === 2) {
+      goToSlide(2);
+    } else {
+      goToSlide(1);
+    }
+  });
+
+  history.replaceState({slide: 1}, '', '#home');
+</script>
+
+</body>
+</html>
